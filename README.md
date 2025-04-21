@@ -3,11 +3,13 @@ Machine learning model to forecast crude oil import volumes based on historical 
 
 ## Contents
 
-- Project Overview
-- Tools
+- [Project Overview](#project-overview)
+- [Tools](#tools)
 - Data Overview
 - Data Preprocessing
 - Exploratory Data Analysis
+- Methodology
+- Results and Conclusion
 
 
 ## Project Overview
@@ -151,7 +153,50 @@ The Random Forest learning curve shows consistently low training error and stead
 
 ![image](https://github.com/user-attachments/assets/f4989001-e609-41d1-a200-6e5e948f87c7)
 
+The XGBoost learning curve shows perfect training error (indicating potential overfitting) and a decreasing cross-validation error up to 22 samples, after which it fluctuated. This suggests the model benefits from more data initially but may require hyperparameter tuning or regularization to improve stability and generalization.
+
+![image](https://github.com/user-attachments/assets/4efb9091-50fb-49c2-80bb-7193c1b9bea6)
+
+![image](https://github.com/user-attachments/assets/f11cd611-8aec-46d5-81b8-1edd56fa4ab6)
 
 
+Hyperparameter tuning with GridSearchCV and 5-fold cross-validation evaluated 16 parameter combinations per model. The optimal parameters for Random Forest were n_estimators=100, max_depth=20, min_samples_split=2, and min_samples_leaf=1, while for XGBoost, they were n_estimators=200, learning_rate=0.05, max_depth=3, and subsample=0.8. This tuning balanced bias and variance, enhancing prediction accuracy and generalization.
 
 
+![image](https://github.com/user-attachments/assets/6936d7fd-873e-4815-b615-cbd1c59d1ca0)
+
+After hyperparameter tuning, both models were evaluated using regression metrics (MSE, MAE, RMSE, and R²). The Random Forest model outperformed XGBoost with lower error values and a higher R² score, indicating it explained more variance in the data. The high RMSE and MAE values are expected due to the large scale of the dataset (in billions), so model performance should be interpreted relative to the data magnitude.
+
+![image](https://github.com/user-attachments/assets/a811a7bd-5acf-4a8d-993f-5502ea176588)
+
+This project allows users to input key macroeconomic factors (GDP, inflation rate, population, oil production) and generates predictions for oil import volume and cost using the trained Random Forest and XGBoost models. The user inputs are processed similarly to the training data, and the predicted values provide insights into potential future oil import trends based on current economic conditions.
+
+![image](https://github.com/user-attachments/assets/aeb80361-0e8f-4ba1-baf4-63580dfca15f)
+
+
+The trained Random Forest and XGBoost models were used to forecast crude oil import volume and cost. Predictions were displayed in a user-friendly format, demonstrating the models' real-world applicability for stakeholders to input new data and receive timely oil import forecasts, aiding in informed planning and decision-making.
+
+
+![image](https://github.com/user-attachments/assets/642ca686-65d3-4be4-a34d-4209bff131a8)
+
+
+I evaluated the feature importances of the Random Forest model to identify the most influential features in its predictions. The importances were calculated using the `.feature_importances` attribute and sorted in descending order.
+
+![image](https://github.com/user-attachments/assets/75a7cbf7-7429-4595-aafc-a0083691bd0a)
+
+From the output, we can observe that the most important features for predicting oil import volume and cost are:
+Per Capita (USD), with the highest importance of 0.272
+GDP (USD), with a value of 0.235
+Crude Oil Production (Cubic Meters), with an importance of 0.200
+Other important features include Population, Canada's Current Account Balance (USD), and Government Net Lending and Borrowing (as a percent of GDP), although their contributions are relatively smaller. Features such as Crude Oil Refining Capacity (Cubic Meters) and Real Interest Rate had the least influence, as indicated by their low importance values.
+This analysis provides valuable insights into the key drivers of oil import volume and cost, which can be leveraged for further optimization and interpretation of the model’s behavior.
+
+## Results and Conclusion
+
+Predictive analytics using machine learning models, specifically Random Forest and XGBoost, can significantly improve planning, budgeting, and procurement decisions for crude oil imports. By analyzing historical data and identifying key macroeconomic and trade-level factors, these models forecast future oil import volumes and costs. This enables businesses and policymakers to make informed decisions, optimize procurement strategies, and adjust plans in response to shifting economic conditions.
+
+The key factors influencing crude oil prices include macroeconomic indicators (such as GDP and per capita income), crude oil production levels, geopolitical events, exchange rates, and government fiscal policies. These factors determine both the demand for oil and its cost on the global market. For instance, higher GDP and per capita income typically lead to greater demand, while geopolitical instability can disrupt supply chains and lead to price volatility.
+
+Macroeconomic and economic trade-level factors play a crucial role in shaping oil import strategies. Factors such as GDP, population growth, and oil production levels directly influence a nation's demand for crude oil imports. Additionally, fiscal policies like the current account balance and government borrowing/ lending impact the cost-efficiency of oil imports. Understanding these factors enables more effective strategies to balance cost and supply chain stability, particularly in volatile economic climates.
+
+In this project, the Random Forest model outperformed XGBoost, with a higher R² score and lower error values, confirming its ability to explain more variance in the data. Both models, after hyperparameter tuning, showed improved accuracy, with feature importance analysis identifying key factors such as GDP, per capita income, and oil production as most influential. These insights provide valuable guidance for optimizing oil import strategies and ensuring cost-efficiency in the supply chain.
