@@ -5,11 +5,11 @@ Machine learning model to forecast crude oil import volumes based on historical 
 
 - [Project Overview](#project-overview)
 - [Tools](#tools)
-- Data Overview
-- Data Preprocessing
-- Exploratory Data Analysis
-- Methodology
-- Results and Conclusion
+- [Data Overview](#data-overview)
+- [Data Preprocessing](#data-preprocessing)
+- [Exploratory Data Analysis](#exploratory-data-analysis)
+- [Methodology](#methodology)
+- [Results and Conclusion](#results-and-conclusion)
 
 
 ## Project Overview
